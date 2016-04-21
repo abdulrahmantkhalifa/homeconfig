@@ -62,7 +62,7 @@ plugins=(git git-extras sublime last-working-dir history )
 
 # User configuration
 
-  export PATH="/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -96,4 +96,13 @@ export GOPATH=/home/art/go/
 export GOROOT=/usr/local/go/
 
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
+alias jsc8='cd /opt/code/github/jumpscale/jumpscale_core8'
+alias jsp8='cd /opt/code/github/jumpscale/jumpscale_portal8'
 
+#this is for docker ip and ssh
+func() {docker inspect $@ | grep "IPAddress"|  cut -d '"' -f 4 }
+alias diip=func
+wtv() {ssh root@`diip $@`}
+alias dcon=wtv
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

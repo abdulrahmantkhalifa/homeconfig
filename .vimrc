@@ -34,6 +34,15 @@ Plugin 'scrooloose/syntastic'
 "colorscheme
 Plugin 'chriskempson/base16-vim'
 
+"autocomplete go-lang
+Plugin 'fatih/vim-go'
+
+"another autocomplete
+Plugin 'Shougo/neocomplete.vim'
+
+"autocomplete python
+Plugin 'davidhalter/jedi-vim'
+
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -64,6 +73,11 @@ set showcmd
 set hlsearch
 set visualbell
 set mouse=a
+
+
+""computer clipboard 
+set clipboard=unnamedplus
+
 " Set the command window height to 2 lines, to avoid many cases of having to
 " press <Enter> to continue"
 set cmdheight=2
@@ -74,6 +88,8 @@ set softtabstop=4
 set expandtab
 syntax  on
 set nuw=6
+vnoremap // y/<C-R>"<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 "searching 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -119,7 +135,7 @@ nmap <F3> :NERDTreeFind<cr>
 """UNITE;SETTINGS
 "
 nnoremap <Leader>' :<C-u>Unite  -buffer-name=search -start-insert file file_rec<cr><CR>
-nnoremap <Leader>; :Unite file_mru<CR>
+nnoremap <Leader>; :<C-u>Unite  -buffer-name=search_recent -start-insert file_mru<cr><CR>
 nnoremap <Leader>p :<C-u>Unite  -buffer-name=tabs -start-insert buffer<cr><CR>
 
 " This allows buffers to be hidden if you've modified a buffer.
@@ -148,3 +164,13 @@ let g:airline#extensions#tabline#enabled = 1
 "the powerline shit u haveto do pip install --user powerline-status for it to
 "work 
 let g:airline_powerline_fonts = 3
+
+"""NEOCOMPLETE;SETTINGS
+"" cache complete
+" Disable AutoComplPop
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+
