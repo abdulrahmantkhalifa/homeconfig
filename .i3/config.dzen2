@@ -13,10 +13,15 @@ set $mod Mod4
 set $ms  Mod1
 
 
-set $ws1 1:Terminal 
-set $ws2 2:sublime :P
-set $ws3 3:Chrome
-set $ws4 4:social 
+set $ws1 :1
+set $ws9 :9
+set $ws0 :0
+set $ws3 :3
+set $ws4 :4
+set $ws8 :8
+set $ws5 :5
+set $ws2 :2
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:FontAwesome 10
@@ -82,7 +87,7 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f fullscreen 
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -111,7 +116,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+0 workspace $ws0
 
 
 # move focused container to workspace
@@ -124,22 +129,37 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+0 move container to workspace $ws0
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, , (c) reload config , (p) shutdown
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, , (c) reload config , (p) shutdown 
 mode "$mode_system"{
-    bindsym l exec --no-startup-id xlock force, mode "default"
-    bindsym e exit, mode "default"
-    bindsym c reload, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
-    # back to normal : Enter or escape 
+        bindsym l exec --no-startup-id lock force, mode "default"
+        bindsym e exit, mode "default"
+        bindsym c reload, mode "default"
+        bindsym s exec --no-startup-id systemctl suspend, mode "default"
+        bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+        bindsym r exec --no-startup-id systemctl reboot, mode "default"
+        bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+        # back to normal : Enter or escape 
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+F12 mode "$mode_system"
+
+
+set $App_launch Open (1) sublime-text3, (2) google-chrome, (3)arandr, (4)Telegram, (5)vlc   
+mode "$App_launch" {
+    bindsym 1 exec subl
+    bindsym 2 exec google-chrome
+    bindsym 3 exec arandr
+    bindsym 4 exec Telegram
+    bindsym 5 exec vlc
+    #back to normal : Enter or escape 
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+F12 mode "$mode_system"
+
+bindsym $mod+F11 mode "$App_launch"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -177,56 +197,54 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-colors {
-        # Whole color settings
-        background #000000
-        statusline #ffffff
-        separator  #666666
-
-        # Type             border  background font
-        focused_workspace  #008fff #007fff #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #aa0000 #990000 #ffffff
+    mode dock
+    position top 
+    font -*-anorexia-medium-*-*-*-11-*-*-*-*-*-*-*
+    workspace_buttons yes
+    colors {
+        background #101010
+        statusline #999999
+        focused_workspace #825969 #191919
+        active_workspace #825969 #101010
+        inactive_workspace #9a878f #191919
+        urgent_workspace #2e3436 #9a878f
     }
-        status_command  i3blocks -c ~/.config/i3blocks/config
-          tray_output LVDS1
-            position top
-         colors {
-             background #232323
-             statusline #DCDCDC
-                }
-	     position top
 }
-
 
 
 ######
 #CUSTOM CONFIGURATION
 ######
-for_window [class="konsole"] border pixel 0
-#for_window [class="Dolphin"] floating enable
-for_window [class="Virt-manager"] floating enable
+for_window [class="Terminator"] border pixel 0
+assign [class="subl"] $ws2
+assign [class="google-chrome"] $ws3
+assign [class="Telegram"] $ws4
 
-assign [class="Wine"] "WineBox"
+
+
 
 
 
 #assigning WS to screen 
-workspace "Terminal" output HDMI1
-workspace "sublime" output HDMI1
-workspace "Skype" output LVDS1
-workspace "Chrome" output HDMI1
+workspace $ws1 output HDMI1
+workspace $ws2 output HDMI1
+workspace $ws3 output LVDS1
+workspace $ws4 output LVDS1
+
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec  amixer set Master 5%+ #increase sound volume
+bindsym XF86AudioLowerVolume exec  amixer set Master   5%- #decrease sound volume
+bindsym XF86AudioMute exec  amixer set Master mute toggle  # mute sound
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightnessi
 
+
+#custom
+focus_follows_mouse no
+hide_edge_borders both
 bindsym $mod+Shift+v move workspace to output right
 bindsym $mod+Shift+x move workspace to output left
 bindsym --release button2 kill

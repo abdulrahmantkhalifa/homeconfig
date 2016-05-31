@@ -50,7 +50,8 @@ bindsym $mod+z exec subl
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec synapse
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -82,6 +83,9 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
+
+# screen lock 
+bindsym Scroll_Lock  exec i3lock -i   ~/Desktop/266509.png -tef 
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -133,7 +137,7 @@ bindsym $mod+Shift+0 move container to workspace $ws0
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, , (c) reload config , (p) shutdown 
 mode "$mode_system"{
-        bindsym l exec --no-startup-id lock force, mode "default"
+        bindsym l exec --no-startup-id i3lock -i   ~/Desktop/266509.png -tef , mode "default"
         bindsym e exit, mode "default"
         bindsym c reload, mode "default"
         bindsym s exec --no-startup-id systemctl suspend, mode "default"
@@ -196,6 +200,14 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+#                       border  bcgrnd  text
+client.focused          #043946 #043946 #ffffff
+client.focused_inactive #101010 #191919 #999999
+client.unfocused        #101010 #191919 #ffffff
+client.urgent           #cd989a #8E1169 #2e3436
+
+client.background			#1d1d1d
+ 
 bar {
 colors {
         # Whole color settings
@@ -204,13 +216,13 @@ colors {
         separator  #666666
 
         # Type             border  background font
-        focused_workspace  #008fff #007fff #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #aa0000 #990000 #ffffff
+        focused_workspace  #222222 #043946 #ffffff
+        active_workspace   #333333 #043946 #ffffff
+        inactive_workspace #222222 #222222 #888888
+        urgent_workspace   #333333 #8E1169 #ffffff
     }
         status_command  i3blocks -c ~/.config/i3blocks/config
-          tray_output LVDS1
+          tray_output HDMI1 
             position top
          colors {
              background #232323
@@ -224,11 +236,24 @@ colors {
 ######
 #CUSTOM CONFIGURATION
 ######
-for_window [class="Terminator"] border pixel 0
-assign [class="subl"] $ws2
-assign [class="google-chrome"] $ws3
-assign [class="Telegram"] $ws4
+###
+#start up applications 
+###
 
+#exec  --no-startup-id i3-msg 'workspace $ws9 ; exec subl'
+#exec --no-startup-id i3-msg 'workspace $ws0; exec code'
+exec vlc
+#exec google-chrome 
+exec synapse 
+#exec i3-msg --no-startup-id i3-msg 'exec terminator'
+#exec Telegram
+exec gitkraken
+
+for_window [class="/usr/bin/zsh"] border pixel 0
+assign [class="google-chrome"] $ws3
+assign [class="GitKraken"] $ws8
+assign [class="vlc"] $ws5
+#assign [class="Telegram"] $ws4
 
 
 
@@ -244,7 +269,7 @@ workspace $ws4 output LVDS1
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec  amixer set Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec  amixer set Master   5%- #decrease sound volume
-bindsym XF86AudioMute exec  amixer set Master mute toggle  # mute sound
+bindsym XF86AudioMute exec  amixer set Master 1 # mute sound
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
