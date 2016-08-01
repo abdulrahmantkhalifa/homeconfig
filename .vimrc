@@ -48,6 +48,7 @@ Plugin 'davidhalter/jedi-vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -173,4 +174,10 @@ let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 " " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
+
+""""JEDI VIM 
+""
+""definition on left 
+let g:jedi#use_splits_not_buffers = "right"
+
 

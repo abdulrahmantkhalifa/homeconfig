@@ -58,7 +58,7 @@ ZSH_THEME="fino"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras sublime last-working-dir history )
+plugins=(git git-extras sublime last-working-dir sudo wd history )
 
 # User configuration
 
@@ -96,10 +96,6 @@ export GOPATH=/opt/code/go/
 export GOROOT=/usr/local/go/
 
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
-alias jsc8='cd /opt/code/github/jumpscale/jumpscale_core8'
-alias jsp8='cd /opt/code/github/jumpscale/jumpscale_portal8'
-alias jsc7='cd /opt/code/github/jumpscale/jumpscale_core7'
-alias jsp7='cd /opt/code/github/jumpscale/jumpscale_portal'
 
 #this is for docker ip and ssh
 func() {docker inspect $@ | grep "IPAddress"|  cut -d '"' -f 4 }
