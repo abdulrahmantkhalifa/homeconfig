@@ -103,4 +103,6 @@ alias diip=func
 wtv() {ssh root@`diip $@`}
 alias dcon=wtv
 
+alias tmux='tmux -2'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

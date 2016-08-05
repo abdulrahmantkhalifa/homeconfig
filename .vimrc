@@ -48,6 +48,12 @@ Plugin 'davidhalter/jedi-vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 
+"tmux airline 
+"Plugin 'edkolev/tmuxline.vim'
+
+"tagbar 
+"
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -164,7 +170,7 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 "the powerline shit u haveto do pip install --user powerline-status for it to
 "work 
-let g:airline_powerline_fonts = 3
+let g:airline_powerline_fonts = 1
 
 """NEOCOMPLETE;SETTINGS
 "" cache complete
@@ -180,4 +186,5 @@ let g:neocomplete#enable_smart_case = 1
 ""definition on left 
 let g:jedi#use_splits_not_buffers = "right"
 
-
+"""tagbar binding 
+nmap <F1> :TagbarToggle<CR>
