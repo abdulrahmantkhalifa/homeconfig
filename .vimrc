@@ -10,6 +10,10 @@ call vundle#begin()
 "powerline alternate 
 Plugin 'vim-airline/vim-airline'
 
+"airline themes
+Plugin 'vim-airline/vim-airline-themes'
+
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -20,7 +24,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
 
 "unite search tool
-Plugin 'Shougo/unite.vim'
+"Plugin 'Shougo/unite.vim'
+
+"plugin fuzzy file finder 
+Plugin 'kien/ctrlp.vim'
 
 "Shougo/neomru.vim, recent folders 
 Plugin 'Shougo/neomru.vim'
@@ -125,7 +132,18 @@ set number
 set autoindent " automatically set indent of new line
 set smartindent
 
-set laststatus=2 " show the satus line all the time
+
+set laststatus=2
+function! StatusToggle()
+    if &laststatus
+        setlocal laststatus=0
+    else
+        setlocal laststatus=2
+    endif
+endfunction
+nnoremap <leader>M :call StatusToggle()<cr>
+"set toggle for line numbers 
+nnoremap <leader>N :setlocal number!<cr>  
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Plugin settings
 "'""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,9 +159,15 @@ nmap <F3> :NERDTreeFind<cr>
 
 """UNITE;SETTINGS
 "
-nnoremap <Leader>' :<C-u>Unite  -buffer-name=search -start-insert file file_rec<cr><CR>
-nnoremap <Leader>; :<C-u>Unite  -buffer-name=search_recent -start-insert file_mru<cr><CR>
-nnoremap <Leader>p :<C-u>Unite  -buffer-name=tabs -start-insert buffer<cr><CR>
+"nnoremap <Leader>' :<C-u>Unite -start-insert file_rec<cr><CR>
+"nnoremap <Leader>; :<C-u>Unite  -buffer-name=search_recent -start-insert file_mru<cr><CR>
+"nnoremap <Leader>p :<C-u>Unite  -buffer-name=tabs -start-insert buffer<cr><CR>
+"
+""""ctrlp
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_match_window_reversed = 0       
+"let g:ctrlp_match_window_bottom = 0
+nmap <Leader>; :CtrlPMixed<cr>
 
 " This allows buffers to be hidden if you've modified a buffer.
 " " This is almost a must if you wish to use buffers in this way.
@@ -171,6 +195,15 @@ let g:airline#extensions#tabline#enabled = 1
 "the powerline shit u haveto do pip install --user powerline-status for it to
 "work 
 let g:airline_powerline_fonts = 1
+let g:airline_theme='simple'
+
+"""fugitive keymaps
+nmap <leader>w :cnext<cr>
+nmap <leader>q :cprevious<cr>
+nmap <leader>W :clast<cr>
+nmap <leader>Q :cfirst<cr>
+
+
 
 """NEOCOMPLETE;SETTINGS
 "" cache complete

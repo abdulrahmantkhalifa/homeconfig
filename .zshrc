@@ -58,7 +58,7 @@ ZSH_THEME="fino"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras sublime last-working-dir sudo wd history )
+plugins=(git git-extras sublime last-working-dir sudo wd history, tmux)
 
 # User configuration
 
@@ -89,7 +89,9 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zrc="vim ~/homeconfig/.zshrc"
+alias vimrc="vim ~/homeconfig/.vimrc"
+alias trc="vim ~/homeconfig/tmux/.tmux.conf.transparentflashy"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 export GOPATH=/opt/code/go/
