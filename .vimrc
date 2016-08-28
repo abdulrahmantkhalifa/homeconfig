@@ -50,6 +50,9 @@ Plugin 'Shougo/neocomplete.vim'
 "autocomplete python
 Plugin 'davidhalter/jedi-vim'
 
+"java auto complete
+Plugin 'artur-shaik/vim-javacomplete2'
+
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -128,10 +131,19 @@ colorscheme molokai
 let g:rehash256 = 1
 
 set number
-
+set cursorline " highlight cursorline
 set autoindent " automatically set indent of new line
 set smartindent
 
+nmap <silent> <leader>Up :wincmd k<CR>
+nmap <silent> <leader>Down :wincmd j<CR>
+nmap <silent> <leader>Left :wincmd h<CR>
+nmap <silent> <leader>Right  :wincmd l<CR>
+
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
 
 set laststatus=2
 function! StatusToggle()
@@ -203,8 +215,6 @@ nmap <leader>q :cprevious<cr>
 nmap <leader>W :clast<cr>
 nmap <leader>Q :cfirst<cr>
 
-
-
 """NEOCOMPLETE;SETTINGS
 "" cache complete
 " Disable AutoComplPop
@@ -218,6 +228,7 @@ let g:neocomplete#enable_smart_case = 1
 ""
 ""definition on left 
 let g:jedi#use_splits_not_buffers = "right"
-
+"force python3 
+"let g:jedi#force_py_version = 3
 """tagbar binding 
 nmap <F1> :TagbarToggle<CR>
