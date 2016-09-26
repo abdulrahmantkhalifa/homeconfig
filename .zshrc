@@ -92,6 +92,7 @@ source $ZSH/oh-my-zsh.sh
 alias zrc="vim ~/homeconfig/.zshrc"
 alias vimrc="vim ~/homeconfig/.vimrc"
 alias trc="vim ~/homeconfig/tmux/.tmux.conf.transparentflashy"
+alias glgj="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 export GOPATH=/opt/code/go/
@@ -100,7 +101,9 @@ export GOROOT=/usr/local/go/
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
 
 #this is for docker ip and ssh
-func() {docker inspect $@ | grep "IPAddress"|  cut -d '"' -f 4 }
+func() {docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@ }
+function pythonfix { sudo ln -sf python"$1" /usr/bin/python }
+setxkbmap us,ar altgr-intl, grp:shifts_toggle,ctrl:nocaps,grp_led:caps
 alias diip=func
 wtv() {ssh root@`diip $@`}
 alias dcon=wtv
