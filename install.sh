@@ -1,4 +1,10 @@
-ln -fs  .vimrc  ~/.vimrc
-ln -fs  .zshrc.simple  ~/.zshrc
-ln -fs  tmux/.tmux.conf.black  ~/.tmux.conf
+rm  -f   ~/.vimrc
+rm  -f ~/.zshrc
+rm -f ~/.tmux.conf
+
+
+
+cp  -f .vimrc  ~/.vimrc
+cp  -f .zshrc.simple  ~/.zshrc
+cp -f tmux/.tmux.conf.black  ~/.tmux.conf
 
