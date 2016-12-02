@@ -105,8 +105,19 @@ func() {docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress
 function pythonfix { sudo ln -sf python"$1" /usr/bin/python }
 setxkbmap us,ar altgr-intl, grp:shifts_toggle,ctrl:nocaps,grp_led:caps
 alias diip=func
-wtv() {ssh root@`diip $@`}
+wtv() {ssh root@`diip $@` -A}
 alias dcon=wtv
+
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
+
 
 alias tmux='tmux -2'
 

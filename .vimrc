@@ -26,6 +26,9 @@ Plugin 'tomasr/molokai'
 "unite search tool
 "Plugin 'Shougo/unite.vim'
 
+"easy movement when searching 
+Plugin 'easymotion/vim-easymotion'
+
 "plugin fuzzy file finder 
 Plugin 'kien/ctrlp.vim'
 
