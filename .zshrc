@@ -58,11 +58,11 @@ ZSH_THEME="fino"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras sublime last-working-dir sudo wd history, tmux)
+plugins=(git git-extras sublime sudo wd history tmux thefuck)
 
 # User configuration
 
-export PATH="/opt/code/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$PATH:/usr/local/bin:/opt/code/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -89,25 +89,25 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zrc="vim ~/homeconfig/.zshrc"
-alias vimrc="vim ~/homeconfig/.vimrc"
-alias trc="vim ~/homeconfig/tmux/.tmux.conf.transparentflashy"
-alias glgj="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias zrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+alias trc="vim ~/.tmux.conf"
+alias i3c="vim ~/.i3/config"
+alias gsh="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 export GOPATH=/opt/code/go/
 export GOROOT=/usr/local/go/
 
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
-
+renamerext() {find . -name "*.$1" -exec rename "s/.$1$/.$2/" {} \;}
 #this is for docker ip and ssh
 func() {docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@ }
 function pythonfix { sudo ln -sf python"$1" /usr/bin/python }
 setxkbmap us,ar altgr-intl, grp:shifts_toggle,ctrl:nocaps,grp_led:caps
 alias diip=func
-wtv() {ssh root@`diip $@` -A}
+wtv() {ssh root@`diip $@`}
 alias dcon=wtv
-
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -118,7 +118,5 @@ man() {
     command man "$@"
 }
 
-
 alias tmux='tmux -2'
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
